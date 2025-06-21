@@ -1,12 +1,12 @@
 import jwt from "jsonwebtoken";
 import envManager from "../config/envManager";
 
-export const generateToken = (id) => {
+export const generateJwtToken = (id) => {
   return jwt.sign({ id }, envManager.JWT_SECRET, {
     expiresIn: "30d", // Token expiration time
   });
 };
 
-export const verifyToken = (token) => {
+export const verifyJwtToken = (token) => {
   return jwt.verify(token, envManager.JWT_SECRET);
 };
