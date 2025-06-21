@@ -5,6 +5,7 @@ import { globalErrorHandler, notFoundHandler } from "./middlewares/errorHandler.
 import corsOptions from "./config/cors.js";
 import morganMiddleware from "./loggers/morgan.logger.js";
 import cookieParser from "cookie-parser";
+import { authRoutes } from "./routes/auth.routes.js";
 
 const app = express();
 
@@ -20,6 +21,7 @@ app.use(cookieParser());
 
 // Routes
 app.use("/ping", (req, res) => res.status(200).json({ message: "hey there!" }));
+app.use("/api/v1", authRoutes);
 
 // router handler middlewares
 app.use(notFoundHandler);
