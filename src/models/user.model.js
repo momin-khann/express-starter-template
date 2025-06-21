@@ -1,6 +1,6 @@
 import mongoose from "mongoose";
-import { encryptPassword } from "../utils/helper";
-import { UserRolesEnum } from "../config/globalConst";
+import { encryptPassword } from "../utils/helper.js";
+import { UserRolesEnum } from "../config/globalConst.js";
 
 const userSchema = new mongoose.Schema(
   {

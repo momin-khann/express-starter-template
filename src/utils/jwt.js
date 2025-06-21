@@ -1,5 +1,5 @@
 import jwt from "jsonwebtoken";
-import envManager from "../config/envManager";
+import envManager from "../config/envManager.js";
 
 export const generateJwtToken = (id) => {
   return jwt.sign({ id }, envManager.JWT_SECRET, {

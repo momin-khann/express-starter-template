@@ -1,10 +1,9 @@
 import { StatusCodes } from "http-status-codes";
-import { ApiError } from "../utils/ApiError";
-import { verifyJwtToken } from "../utils/jwt";
-import { User } from "../models/user.model";
-import { ApiResponse } from "../utils/ApiResponse";
-
-const { extractToken } = require("../utils/helper");
+import { ApiError } from "../utils/ApiError.js";
+import { verifyJwtToken } from "../utils/jwt.js";
+import { User } from "../models/user.model.js";
+import { ApiResponse } from "../utils/ApiResponse.js";
+import { extractToken } from "../utils/helper.js";
 
 export const verifyToken = async (req, res, next) => {
   const token = extractToken(req);
