@@ -1,6 +1,7 @@
 import mongoose from "mongoose";
-import { encryptPassword } from "../utils/helper.js";
+import { encryptPassword, verifyPassword } from "../utils/helper.js";
 import { UserRolesEnum } from "../config/globalConst.js";
+import crypto from "node:crypto";
 
 const userSchema = new mongoose.Schema(
   {
@@ -35,7 +36,7 @@ const userSchema = new mongoose.Schema(
       default:
         "https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_960_720.png",
     },
-    isVerified: {
+    isEmailVerified: {
       type: Boolean,
       default: false,
     },
@@ -66,8 +67,8 @@ userSchema.pre("save", async function (next) {
   if (this.isModified("password")) {
     const hashedPassword = await encryptPassword(this.password);
     this.password = hashedPassword;
-    next();
   }
+  next();
 });
 
 userSchema.pre(
@@ -77,5 +78,30 @@ userSchema.pre(
     next();
   }
 );
+
+userSchema.methods.verifyPassword = async function (password) {
+  return await verifyPassword(this.password, password);
+};
+
+userSchema.methods.generateAccessToken = function () {
+  return jwt.sign(
+    {
+      _id: this._id,
+      email: this.email,
+    },
+    process.env.ACCESS_TOKEN_SECRET,
+    { expiresIn: process.env.ACCESS_TOKEN_EXPIRY }
+  );
+};
+
+userSchema.methods.generateRefreshToken = function () {
+  return jwt.sign(
+    {
+      _id: this._id,
+    },
+    process.env.REFRESH_TOKEN_SECRET,
+    { expiresIn: process.env.REFRESH_TOKEN_EXPIRY }
+  );
+};
 
 export const User = mongoose.model("users", userSchema);
