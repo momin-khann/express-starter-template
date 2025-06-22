@@ -1,7 +1,7 @@
 import mongoose from "mongoose";
 import { encryptPassword, verifyPassword } from "../utils/helper.js";
 import { UserRolesEnum } from "../config/globalConst.js";
-import crypto from "node:crypto";
+import jwt from "jsonwebtoken";
 
 const userSchema = new mongoose.Schema(
   {

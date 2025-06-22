@@ -4,8 +4,8 @@ import logger from "../loggers/winston.logger.js";
 import { nodeEnv } from "../config/globalConst.js";
 
 const globalErrorHandler = (err, req, res, next) => {
-  const statusCode = err.statusCode || StatusCodes.INTERNAL_SERVER_ERROR;
-  const message = err.message || "Something went wrong";
+  let statusCode = err.statusCode || StatusCodes.INTERNAL_SERVER_ERROR;
+  let message = err.message || "Something went wrong";
 
   if (err.name === "JsonWebTokenError") {
     statusCode = StatusCodes.UNAUTHORIZED;
