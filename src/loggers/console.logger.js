@@ -1,6 +1,6 @@
 import { green, red, yellow, blue, cyan, gray, bold } from "colorette";
 
-const logger = {
+const consoleLog = {
   // Success messages
   success: (message) => console.log(green(`✅ ${message}`)),
 
@@ -42,4 +42,4 @@ const logger = {
   },
 };
 
-export default logger;
+export { consoleLog };

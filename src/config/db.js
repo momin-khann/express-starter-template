@@ -1,6 +1,6 @@
-import consoleLog from "../loggers/console.logger.js";
 import mongoose from "mongoose";
 import envManager from "../config/envManager.js";
+import { consoleLog } from "../loggers/console.logger.js";
 
 export const connectMongoDB = async () => {
   const { MONGODB_URL, DB_NAME } = envManager;

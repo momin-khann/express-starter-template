@@ -20,8 +20,7 @@ app.use(cookieParser());
 // custom middlewares
 
 // Routes
-app.use("/ping", (req, res) => res.status(200).json({ message: "hey there!" }));
-app.use("/api/v1", authRoutes);
+app.use("/api/v1/auth", authRoutes);
 
 // router handler middlewares
 app.use(notFoundHandler);
